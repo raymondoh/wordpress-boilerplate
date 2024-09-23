@@ -1,7 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const environment = require("./environment");
@@ -9,6 +9,7 @@ const environment = require("./environment");
 module.exports = {
   entry: {
     main: path.resolve(environment.paths.source, "js", "main.js"),
+    alpine: "alpinejs",
   },
   output: {
     filename: "js/[name].js",
@@ -62,18 +63,5 @@ module.exports = {
         },
       ],
     }),
-    ...["index", "about", "services", "service-1"].map(
-      (name) =>
-        new HtmlWebpackPlugin({
-          template: path.resolve(environment.paths.source, `${name}.html`),
-          favicon: path.resolve(
-            environment.paths.source,
-            "images/icons/favicon.ico",
-          ),
-          filename: `${name}.html`,
-          inject: true,
-          hash: true,
-        }),
-    ),
   ],
 };
