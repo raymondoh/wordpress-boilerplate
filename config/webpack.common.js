@@ -1,10 +1,9 @@
+const environment = require("./environment");
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
-const environment = require("./environment");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 module.exports = {
   entry: {
@@ -12,8 +11,9 @@ module.exports = {
     alpine: "alpinejs",
   },
   output: {
-    filename: "js/[name].js",
+    filename: "js/[name].[contenthash].js", // Add contenthash to JS filenames
     path: environment.paths.output,
+    //path: path.resolve(__dirname, "../dist"), // Ensure the output is in /dist
   },
   module: {
     rules: [
@@ -53,7 +53,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "css/[name].css",
+      filename: "css/[name].[contenthash].css", // Output CSS into the /dist/css folder
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -62,6 +62,11 @@ module.exports = {
           to: path.resolve(environment.paths.output, "images"),
         },
       ],
+    }),
+    new WebpackManifestPlugin({
+      fileName: "manifest.json", // Output the manifest file
+      //publicPath: "/dist/js/", // Adjust based on your setup
+      publicPath: "/dist/", // Adjust based on your setup
     }),
   ],
 };

@@ -12,7 +12,11 @@ module.exports = merge(commonConfig, {
         host: "localhost",
         port: 3001,
         proxy: "<PROJECT_URL>", // Placeholder for the script to replace
-        https: true,
+        // change the path to your local certificate
+        // https: {
+        //   key: "/Applications/MAMP/conf/ssl/CHANGE HERE.local.key",
+        //   cert: "/Applications/MAMP/conf/ssl/CHANGE HERE.local.crt",
+        // },
       },
       {
         reload: true,

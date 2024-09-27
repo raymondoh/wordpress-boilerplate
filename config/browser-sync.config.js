@@ -6,8 +6,11 @@ module.exports = {
   open: true, // Automatically open the browser
   reload: false, // Set to true if you want BrowserSync to reload on changes
   proxy: "<PROJECT_URL>", // Placeholder for the script to replace
-  https: true, // Since your MAMP URL uses HTTPS
-  // If you are using self-signed certificates, you may need to ignore SSL errors:
+  // change the path to your local certificate
+  // https: {
+  //   key: "/Applications/MAMP/conf/ssl/CHANGE HERE.local.key",
+  //   cert: "/Applications/MAMP/conf/ssl/CHANGE HERE.local.crt",
+  // },
   ghostMode: {
     clicks: false,
     forms: false,
